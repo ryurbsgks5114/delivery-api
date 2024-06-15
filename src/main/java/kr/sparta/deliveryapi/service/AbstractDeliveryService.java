@@ -31,11 +31,7 @@ public abstract class AbstractDeliveryService<T, U extends JpaRepository<T, Long
         return repository.findAll();
     }
 
-    public String generateTrackingNo(String description) {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"))
-                + String.valueOf(description.hashCode()).substring(0, 4);
-    }
-
+    @Override
     public Delivery deliver(Long modelId) {
         final T model = repository.findById(modelId)
                 .orElseThrow(IllegalArgumentException::new);
@@ -46,6 +42,11 @@ public abstract class AbstractDeliveryService<T, U extends JpaRepository<T, Long
         deliveryRepository.save(delivery);
 
         return delivery;
+    }
+
+    public String generateTrackingNo(String description) {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"))
+                + String.valueOf(description.hashCode()).substring(0, 4);
     }
 
     public abstract String getModelInfo(T model);

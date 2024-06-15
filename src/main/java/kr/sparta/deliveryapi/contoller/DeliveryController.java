@@ -4,6 +4,7 @@ import kr.sparta.deliveryapi.model.Delivery;
 import kr.sparta.deliveryapi.model.enumtype.DeliveryStatus;
 import kr.sparta.deliveryapi.model.Food;
 import kr.sparta.deliveryapi.model.Parcel;
+import kr.sparta.deliveryapi.service.DeliveryService;
 import kr.sparta.deliveryapi.service.FoodDeliveryService;
 import kr.sparta.deliveryapi.service.ParcelDeliveryService;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DeliveryController {
-    private final FoodDeliveryService foodDeliveryService;
-    private final ParcelDeliveryService parcelDeliveryService;
+    private final DeliveryService<Food> foodDeliveryService;
+    private final DeliveryService<Parcel> parcelDeliveryService;
 
-    public DeliveryController(FoodDeliveryService foodDeliveryService, ParcelDeliveryService parcelDeliveryService) {
+    public DeliveryController(DeliveryService<Food> foodDeliveryService, DeliveryService<Parcel> parcelDeliveryService) {
         this.foodDeliveryService = foodDeliveryService;
         this.parcelDeliveryService = parcelDeliveryService;
     }
